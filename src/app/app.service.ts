@@ -5,8 +5,8 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class AppService {
 
-    private urlVehicle = "http://localhost:8080/vehicle";
-    private urlVehicleType = "http://localhost:8080/vehicleType";
+    private urlVehicle = "http://ec2-18-188-109-114.us-east-2.compute.amazonaws.com:8080/vehicle";
+    private urlVehicleType = "http://ec2-18-188-109-114.us-east-2.compute.amazonaws.com:8080/vehicleType";
 
     constructor(private http: Http) { }
 
