@@ -1,20 +1,54 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{title}}!
+    Welcome to Vehicles CRUD!
   </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#vehicleTypeModal">Add VehicleType</button>
+
+<div>
+  <table class="table">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let vehicleType of vehicleTypes">
+      <th scope="row">{{vehicleType.id}}</th>
+      <td>{{vehicleType.name}}</td>
+      <td>{{vehicleType.description}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="editVehicleType(vehicleType)" data-toggle="modal" data-target="#vehicleTypeModal">Edit</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteVehicleType(vehicleType)">Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- VehicleType Modal -->
+<div class="modal fade" id="vehicleTypeModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="inputName">Name</label>
+            <input class="form-control" id="inputName" name="inputName" placeholder="Name" [(ngModel)]="vehicleType.name">
+          </div>
+          <div class="form-group">
+            <label for="inputDescription">Password</label>
+            <input class="form-control" id="inputDescription" name="inputDescription" placeholder="Description" [(ngModel)]="vehicleType.description">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelVehicleType()">Cancel</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)=saveVehicleType(vehicleType)>Save</button>
+      </div>
+    </div>
+  </div>
+</div>
