@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
 
   editVehicle(vehicle) {
     this.appService.getOneVehicle(vehicle.id).subscribe(response => {
-      console.log(response.json());
       if (response.ok) this.vehicle = response.json();
     })
   }
