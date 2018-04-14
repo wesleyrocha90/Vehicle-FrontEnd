@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
 
   editVehicle(vehicle) {
     this.appService.getOneVehicle(vehicle.id).subscribe(response => {
+      console.log(response.json());
       if (response.ok) this.vehicle = response.json();
     })
   }
@@ -39,13 +40,13 @@ export class AppComponent implements OnInit {
   saveVehicle(vehicle) {
     this.appService.saveVehicle(vehicle).subscribe(response => {
       if (response.ok) this.updateData();
+      this.cancelVehicle();
     })
   }
 
   deleteVehicle(vehicle) {
     this.appService.deleteOneVehicle(vehicle.id).subscribe(response => {
       if (response.ok) this.updateData();
-      this.cancelVehicle();
     })
   }
 
