@@ -4,29 +4,70 @@
   </h1>
 </div>
 
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#vehicleTypeModal">Add VehicleType</button>
+<div style="display: flex; flex-direction: row; justify-content: space-around;">
 
-<div>
-  <table class="table">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let vehicleType of vehicleTypes">
-      <th scope="row">{{vehicleType.id}}</th>
-      <td>{{vehicleType.name}}</td>
-      <td>{{vehicleType.description}}</td>
-      <td>
-        <button class="btn btn-primary" (click)="editVehicleType(vehicleType)" data-toggle="modal" data-target="#vehicleTypeModal">Edit</button>
-      </td>
-      <td>
-        <button class="btn btn-danger" (click)="deleteVehicleType(vehicleType)">Delete</button>
-      </td>
-    </tr>
-  </table>
+  <div style="flex-grow: 1; padding: 20px;">
+    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+      <h2>VehicleType</h2>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#vehicleTypeModal">Add VehicleType</button>
+    </div>
+    <div>
+      <table class="table">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let vehicleType of vehicleTypes">
+          <th scope="row">{{vehicleType.id}}</th>
+          <td>{{vehicleType.name}}</td>
+          <td>{{vehicleType.description}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editVehicleType(vehicleType)" data-toggle="modal" data-target="#vehicleTypeModal">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteVehicleType(vehicleType)">Delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1; padding: 20px;">
+    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+      <h2>Vehicle</h2>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#vehicleModal">Add Vehicle</button>
+    </div>
+    <div>
+      <table class="table">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Plate</th>
+          <th scope="col">VehicleType</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let vehicle of vehicles">
+          <th scope="row">{{vehicle.id}}</th>
+          <td>{{vehicle.name}}</td>
+          <td>{{vehicle.description}}</td>
+          <td>{{vehicle.plate}}</td>
+          <td>{{vehicle.vehicleType?.name}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editVehicle(vehicle)" data-toggle="modal" data-target="#vehicleModal">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteVehicle(vehicle)">Delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
 </div>
 
 <!-- VehicleType Modal -->
@@ -40,7 +81,7 @@
             <input class="form-control" id="inputName" name="inputName" placeholder="Name" [(ngModel)]="vehicleType.name">
           </div>
           <div class="form-group">
-            <label for="inputDescription">Password</label>
+            <label for="inputDescription">Description</label>
             <input class="form-control" id="inputDescription" name="inputDescription" placeholder="Description" [(ngModel)]="vehicleType.description">
           </div>
         </form>
@@ -48,6 +89,40 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelVehicleType()">Cancel</button>
         <button type="button" class="btn btn-success" data-dismiss="modal" (click)=saveVehicleType(vehicleType)>Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vehicle Modal -->
+<div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="inputName">Name</label>
+            <input class="form-control" id="inputName" name="inputName" placeholder="Name" [(ngModel)]="vehicle.name">
+          </div>
+          <div class="form-group">
+            <label for="inputDescription">Description</label>
+            <input class="form-control" id="inputDescription" name="inputDescription" placeholder="Description" [(ngModel)]="vehicle.description">
+          </div>
+          <div class="form-group">
+            <label for="inputPlate">Plate</label>
+            <input class="form-control" id="inputPlate" name="inputPlate" placeholder="Plate" [(ngModel)]="vehicle.plate">
+          </div>
+          <div class="form-group">
+            <label for="inputVehicleType">VehicleType</label>
+            <select class="form-control" id="inputVehicleType" name="inputPlate" [(ngModel)]="vehicle.vehicleType">
+              <option *ngFor="let type of vehicleTypes" [ngValue]="type.id ">{{type.name}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelVehicle()">Cancel</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)=saveVehicle(vehicle)>Save</button>
       </div>
     </div>
   </div>

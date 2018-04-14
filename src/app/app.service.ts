@@ -20,6 +20,14 @@ export class AppService {
         return this.http.get(this.urlVehicle + '/' + id);
     }
 
+    saveVehicle(vehicle): Observable<any> {
+        return this.http.post(this.urlVehicle, vehicle);
+    }
+
+    deleteOneVehicle(id): Observable<any> {
+        return this.http.delete(this.urlVehicle + '/' + id);
+    }
+
     // Methods to VehicleType
 
     getAllVehicleType(): Observable<any> {

@@ -28,6 +28,33 @@ export class AppComponent implements OnInit {
     this.updateData();
   }
 
+  // Methods to work with vehicle
+
+  editVehicle(vehicle) {
+    this.appService.getOneVehicle(vehicle.id).subscribe(response => {
+      if (response.ok) this.vehicle = response.json();
+    })
+  }
+
+  saveVehicle(vehicle) {
+    this.appService.saveVehicle(vehicle).subscribe(response => {
+      if (response.ok) this.updateData();
+    })
+  }
+
+  deleteVehicle(vehicle) {
+    this.appService.deleteOneVehicle(vehicle.id).subscribe(response => {
+      if (response.ok) this.updateData();
+      this.cancelVehicle();
+    })
+  }
+
+  cancelVehicle() {
+    this.vehicle = {};
+  }
+
+  // Methods to work with vehicleType
+
   editVehicleType(vehicleType) {
     this.appService.getOneVehicleType(vehicleType.id).subscribe(response => {
       if (response.ok) this.vehicleType = response.json();
@@ -36,15 +63,14 @@ export class AppComponent implements OnInit {
 
   saveVehicleType(vehicleType) {
     this.appService.saveVehicleType(vehicleType).subscribe(response => {
-      if (response.ok) console.log(response.json());
-      this.updateData();
+      if (response.ok) this.updateData();
+      this.cancelVehicleType();
     })
   }
 
   deleteVehicleType(vehicleType) {
     this.appService.deleteOneVehicleType(vehicleType.id).subscribe(response => {
-      if (response.ok) console.log(response.json());
-      this.updateData();
+      if (response.ok) this.updateData();
     })
   }
 
